@@ -4,13 +4,13 @@ import plotly.express as px
 
 # Set page title and favicon
 st.set_page_config(
-    page_title="Interactive Data Visualization",
+    page_title="Visuallite - A data visualization tool",
     page_icon=":chart_with_upwards_trend:"
 )
 
 # Set title and sidebar header
-st.title("Interactive Data Visualization")
-st.sidebar.header("Visualization Settings")
+st.title("Visuallite - A data visualization tool")
+st.sidebar.header("Visual picker")
 
 # Set background color and text color
 st.markdown(
@@ -32,6 +32,7 @@ st.markdown(
     .sidebar .sidebar-content {
         font-family: Arial, sans-serif;
         padding: 1rem;
+        
     }
     </style>
     """,

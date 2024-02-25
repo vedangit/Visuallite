@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import statsmodels
+#from streamlit.report_thread import get_report_ctx
+#from streamlit.server.server import Server
 
 # Set page title and favicon
 st.set_page_config(
@@ -42,10 +45,15 @@ st.markdown(
 # Upload CSV file and display DataFrame
 st.subheader("Uploaded Dataset:")
 uploaded_file = st.sidebar.file_uploader(label="Upload your CSV file", type=['csv'])
-df = pd.DataFrame([1, 2, 3])
+if 'df' not in st.session_state:
+    st.session_state.df = pd.DataFrame([1, 2, 3])  # Default DataFrame if not uploaded
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.write(df)
+    st.session_state.df = pd.read_csv(uploaded_file)
+if st.session_state.df is not None:
+    st.write(st.session_state.df)
+    
+    
+df = st.session_state.df 
 
 # Select chart type and features
 select_chart = st.sidebar.selectbox(
@@ -53,7 +61,7 @@ select_chart = st.sidebar.selectbox(
     options=['None', 'Line Plots', 'Scatter Plots', 'Histogram Plots', 'Bar Plots', 'Box Plots', 'Violin Plots']
 )
 columns_list = df.columns.tolist()
-
+trend_list = ['ols','lowess', 'expanding']
 if select_chart != 'None':
     st.sidebar.subheader(select_chart + " Features")
     select_x = st.sidebar.selectbox('X axis', options=columns_list)
@@ -63,7 +71,8 @@ if select_chart != 'None':
     if select_chart == 'Line Plots':
         plot = px.line(df, x=select_x, y=select_y, color=variation)
     elif select_chart == 'Scatter Plots':
-        plot = px.scatter(df, x=select_x, y=select_y, color=variation)
+        trend = st.sidebar.selectbox('Trend Line', options = trend_list)
+        plot = px.scatter(df, x=select_x, y=select_y, color=variation, trendline=trend)
     elif select_chart == 'Histogram Plots':
         plot = px.histogram(df, x=select_x, y=select_y, color=variation)
     elif select_chart == 'Bar Plots':

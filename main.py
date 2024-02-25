@@ -1,9 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import statsmodels
-#from streamlit.report_thread import get_report_ctx
-#from streamlit.server.server import Server
 
 # Set page title and favicon
 st.set_page_config(
@@ -35,7 +32,6 @@ st.markdown(
     .sidebar .sidebar-content {
         font-family: Arial, sans-serif;
         padding: 1rem;
-        
     }
     </style>
     """,
@@ -51,8 +47,7 @@ if uploaded_file is not None:
     st.session_state.df = pd.read_csv(uploaded_file)
 if st.session_state.df is not None:
     st.write(st.session_state.df)
-    
-    
+
 df = st.session_state.df 
 
 # Select chart type and features
@@ -82,4 +77,5 @@ if select_chart != 'None':
     elif select_chart == 'Violin Plots':
         plot = px.violin(df, x=select_x, y=select_y, color=variation)
 
+    # Pass Plotly figure directly to st.plotly_chart()
     st.plotly_chart(plot)

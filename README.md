@@ -44,6 +44,4 @@ Visuallite is a web-based data visualization tool built with Streamlit. It allow
 4. **Visualize Data**: Choose from various chart types available in the sidebar to visualize your data interactively.
 
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

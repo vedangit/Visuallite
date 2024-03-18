@@ -44,4 +44,6 @@ Visuallite is a web-based data visualization tool built with Streamlit. It allow
 4. **Visualize Data**: Choose from various chart types available in the sidebar to visualize your data interactively.
 
 
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+
 
